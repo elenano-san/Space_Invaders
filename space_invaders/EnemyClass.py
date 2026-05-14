@@ -57,7 +57,15 @@ def main():
                 run = False
                 
         for enemy in enemies:
-            enemies.move()
+            enemy.move()
             
-            
-            
+        WIN.fill((0, 0, 0))
+        for enemy in enemies:
+            enemy.draw(WIN)
+        pygame.display.update()
+        
+    pygame.quit()
+    
+
+WIDTH, HEIGHT = 800, 600
+WIN = pygame.display.set_mode((WIDTH, HEIGHT))
