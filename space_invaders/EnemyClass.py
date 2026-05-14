@@ -35,7 +35,7 @@ class Enemy(Ship):
     def create(self, amount):
         enemies = []
         for i in range(amount):
-            enemy = Enemy(x=random.randrange(20, WIDTH - ENEMY_BLUE_IMAGE.get_width() - 20)
+            enemy = Enemy(x=random.randrange(20, WIDTH - ENEMY_BLUE_IMAGE.get_width() - 20),
                           y=random.randrange(-1000, -100),
                           color=random.choice(['blue', 'green', 'purple']),
                           speed=self.speed)
@@ -58,4 +58,6 @@ def main():
                 
         for enemy in enemies:
             enemies.move()
+            
+            
             
