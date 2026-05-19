@@ -1,6 +1,9 @@
 import pygame
 from pygame import mixer
 import os
+from GameClass import Game
+from DrawingClass import Drawing
+from PlayerClass import Player
 
 #  Background
 BACKGROUND = pygame.image.load(os.path.join('img', 'background.png'))
@@ -33,5 +36,10 @@ def main():
         mixer.music.play(-1)
     except:
         pass
-    
-    
+
+font = pygame.font.SysFont("comicsans", 60)
+game = Game(font, FPS, 3, WIN, WIDTH, HEIGHT, 0, clock)
+
+player_x = ((WIDTH) - (PLAYER_IMAGE.get_width())) / 2
+player_y = 450
+player = Player(x=player_x, y=player_y, x_speed=5, y_speed=4)
