@@ -2,8 +2,9 @@ import pygame
 from pygame import mixer
 import os
 from GameClass import Game
-from DrawingClass import Drawing
+from space_invaders.DrawingClass import Drawing
 from PlayerClass import Player
+from EnemyClass import Enemy
 
 #  Background
 BACKGROUND = pygame.image.load(os.path.join('img', 'background.png'))
@@ -28,7 +29,7 @@ except:
     pass
 
 def main():
-    puntaje = 0
+    score = 0
     run = True
     clock = pygame.time.Clock()
     FPS = 60
@@ -37,9 +38,45 @@ def main():
     except:
         pass
 
-font = pygame.font.SysFont("comicsans", 60)
-game = Game(font, FPS, 3, WIN, WIDTH, HEIGHT, 0, clock)
+    font = pygame.font.SysFont("comicsans", 60)
+    game = Game(font, FPS, 3, WIN, WIDTH, HEIGHT, 0, clock)
 
-player_x = ((WIDTH) - (PLAYER_IMAGE.get_width())) / 2
-player_y = 450
-player = Player(x=player_x, y=player_y, x_speed=5, y_speed=4)
+    player_x = ((WIDTH) - (PLAYER_IMAGE.get_width())) / 2
+    player_y = 450
+    player = Player(x=player_x, y=player_y, x_speed=5, y_speed=4)
+
+    enemy_init = Enemy(speed = 3)
+    enemy_wave = 4
+    enemies = enemy_init.create(enemy_wave)
+
+    draw = Drawing(WIN)
+    draw.drawing(game, player, enemies, FPS=60, puntos=0)
+
+    while run:
+        clock.tick(FPS)
+        
+        # Game Over
+        if game.over():
+            if score > game.max_score:
+                sound = pygame.mixer.Sound('sounds/ganar.mp3')
+                sound.play()
+                screen = ScreenName(score, main_menu)
+                
+                pygame.quit()
+            else:
+                main_menu()
+                run = False
+            continue
+        
+        # Cerrar juego
+        if game.escape():
+            run = False
+            continue
+        
+        if len(enemies) == 0:
+            game.level += 1
+            enemy_wave += 1
+            enemy.increase_speed()
+            player.increase_speed()
+            enemies = enemy.create(amount = enemy_wave)
+            
