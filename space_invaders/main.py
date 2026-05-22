@@ -79,4 +79,25 @@ def main():
             enemy.increase_speed()
             player.increase_speed()
             enemies = enemy.create(amount = enemy_wave)
+        
+        
+    player.move()
+    player.create_bullets()
+    game.reload_bullets(len(player.bullets))
+    player.cooldown()
+    
+    # Enemigos en movimiento
+    for enemy in enemies:
+        enemy.move()
+        if player.hit(enemy):
+            enemies.remove(enemy)
+            player.fired_bullets.pop(0)
+            crash_sound = pygame.mixer.Sound('sounds/explosion.wav')
+            crash_sound.play()
+            score += 1
+        if enemy.y + enemy.get_height() > HEIGHT:
+            game.lives -= 1
+            enemies.remove(enemy)
             
+    draw.drawing(game, player, enemies, FPS, score)
+    
