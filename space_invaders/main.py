@@ -101,3 +101,10 @@ def main():
             
     draw.drawing(game, player, enemies, FPS, score)
     
+def init_game():
+    main()
+    
+def init_score():
+    score_menu = ScoreMenu (main_menu).execute()
+    
+    
