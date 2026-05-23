@@ -5,6 +5,9 @@ from GameClass import Game
 from space_invaders.DrawingClass import Drawing
 from PlayerClass import Player
 from EnemyClass import Enemy
+from DrawingClass import Drawing
+
+
 
 #  Background
 BACKGROUND = pygame.image.load(os.path.join('img', 'background.png'))
@@ -107,4 +110,11 @@ def init_game():
 def init_score():
     score_menu = ScoreMenu (main_menu).execute()
     
+def init_about():
+    about_menu = AboutMenu(main_menu).execute()
     
+def main_menu():
+    main_menu = MainMenu(init_game, init_score, init_about).main_menu()
+    
+    
+main_menu()         
