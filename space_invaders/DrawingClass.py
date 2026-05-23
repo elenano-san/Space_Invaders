@@ -1,9 +1,6 @@
-from EnemyClass import HEIGHT
-from EnemyClass import WIDTH
-from main import BACKGROUND
 import pygame
 import os
-from enemyClass import Enemy
+from EnemyClass import Enemy
 from ShipClass import Ship
 from GameClass import Game
 from BulletClass import Bullet
@@ -26,8 +23,8 @@ class Drawing:
             
         player.draw(self.window)
         
-    game.draw_HUD()
-    points_label = self.font.render(f'Score: {score}', 1, (255,255,255))
-    self.window.blit(points_label, (HEIGHT/2, 10))
-    pygame.display.update()
-    
+        game.draw_HUD()
+        points_label = self.font.render(f'Score: {score}', 1, (255,255,255))
+        self.window.blit(points_label, (HEIGHT/2, 10))
+        pygame.display.update()
+        

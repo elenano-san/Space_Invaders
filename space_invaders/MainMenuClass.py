@@ -88,3 +88,24 @@ class MainMenu:
                     if event.key == pygame.K_UP:
                         print("("+str(option_output)+ "-1)" + "%" + str(len(options)) + "=" + str((option_output - 1) % len(options)))
                         option_output = (option_output - 1) % len(options)
+                    elif event.key == pygame.K_DOWN:
+                        print("("+str(option_output)+ "+1)" + "%" + str(len(options)) + "=" + str((option_output + 1) % len(options)))
+                        option_output = (option_output + 1) % len(options)
+                    elif event.key == pygame.K_RETURN:
+                        option_selected = options[option_output]
+                        
+                        if(option_selected.lower() == "start game"):
+                            print("Iniciar juego")
+                            
+                            self.init_game_mtd()
+                            pygame.quit()
+                        elif(option_selected.lower() == "high scores"):
+                            print("Mostrar puntajes")
+                            self.init_score_mtd()
+                            pygame.quit()
+                        elif(option_selected.lower() == "about"):
+                            print("Mostrar acerca de")
+                            self.init_about_mtd()
+                            pygame.quit()
+                        else:
+                            print("Opción no válida")
